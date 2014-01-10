@@ -33,11 +33,15 @@ def appointment_input(db_name):
 
 def item_input(db_name):
     BodiceType = select_data(4,db_name)
-    CustomerID = select_data(1,db_name)
-    DressTypeID = select_data(5,db_name)
-    StatusID = select_data(2,db_name)
+    Customer = select_data(1,db_name)
+    DressType = select_data(5,db_name)
+    Status = select_data(2,db_name)
     Bridal = input("Is this a bridal item?: ")
     DateIn = input("Please enter the Date the item came in: ")
     DateRequired = input("Please enter the date the item in required (if applicable): ")
     Instructions = input("Please enter the instructions for the item: ")
     OtherRequirements = input("Please enter any otger requirements: ")
+
+def appointment_item(db_name):
+    Appointment = select_data(6,db_name)
+    Item = 

@@ -18,4 +18,4 @@ def select_data(code,db_name):
     elif code == 8:
         temp = search_appointment_item_data(db_name)
     for n in range(len(temp)):
-       print("{0}. {1} {")
+       print(temp(n))
