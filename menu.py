@@ -1,7 +1,4 @@
-from ammend_data_test import *
-from create_database import *
-from delete_data_test import *
-from insert_data_test import *
+from bibliography import *
 
 import sys
 
@@ -96,28 +93,28 @@ Or press "M" to return to the menu""")
     return choice
 
 def view_menu():
-##    print("""Which area would you like to view?
-##
-##1. Appointment
-##
-##2. AppointmentItem
-##
-##3. Bodice Type
-##
-##4. Customer
-##
-##5. Dress Type
-##
-##6. Item
-##
-##7. Status
-##
-##8. Type
-##
-##Please enter the number of your choice below (1-8)""")
-##    choice = input()
+    print("""Which area would you like to view?
+
+1. Appointment
+
+2. AppointmentItem
+
+3. Bodice Type
+
+4. Customer
+
+5. Dress Type
+
+6. Item
+
+7. Status
+
+8. Type
+
+Please enter the number of your choice below (1-8)""")
+    choice = input()
 ##    print(choice)
-    pass
+    return choice
 
 def create_menu():
     print("""Please press "Enter" to carry on to the database creation
@@ -197,29 +194,8 @@ if __name__ == "__main__":
             if choice == "m" or choice == "M":
                 print()
                 pass
-            elif choice == '1':
-                pass
-            elif choice == '2':
-                pass
-            elif choice == '3':
-                pass
-            elif choice == '4':
-##                return search_customer_data(db_name)
-                pass
-            elif choice == '5':
-                pass
-            elif choice == '6':
-                pass
-            elif choice == '7':
-                pass
-            elif choice == '8':
-                pass
-            elif choice == '4':
-                search_customer_data(db_name)
-            elif choice == '4':
-                print('test1')
-                search_customer_data(db_name)
-                print('test2')
+            else:
+                select_data2(choice,db_name)
         elif choice == '6':
             db_name = db_name_input()
         else:

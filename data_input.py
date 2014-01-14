@@ -44,4 +44,5 @@ def item_input(db_name):
 
 def appointment_item(db_name):
     Appointment = select_data(6,db_name)
-    Item = 
+    Item = select_data(7,db_name)
+    return Appointment,Item

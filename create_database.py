@@ -3,6 +3,7 @@ import sqlite3
 def create_table(db_name,table_name,sql):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
+        cursor.execute("PRAGMA foreign_keys = ON")
         cursor.execute("select name from sqlite_master where name=?",(table_name,))
         result = cursor.fetchall()
         keep_table = True
@@ -30,7 +31,7 @@ def create_appointment_table(db_name):
              Date string,
              Time string,
              primary key (AppointmentID),
-             foreign key (CustomerID) references Customer(CustomerID),
+             foreign key (CustomerID) references Customer(CustomerID) ON UPDATE CASCADE,
              foreign key (TypeID) references Type(TypeID))"""
     create_table(db_name,table_name,sql)
 ##    print("1")
