@@ -31,8 +31,8 @@ def create_appointment_table(db_name):
              Date string,
              Time string,
              primary key (AppointmentID),
-             foreign key (CustomerID) references Customer(CustomerID) ON UPDATE CASCADE,
-             foreign key (TypeID) references Type(TypeID))"""
+             foreign key (CustomerID) references Customer(CustomerID) ON UPDATE CASCADE ON DELETE RESTRICT,
+             foreign key (TypeID) references Type(TypeID)ON UPDATE CASCADE ON DELETE RESTRICT)"""
     create_table(db_name,table_name,sql)
 ##    print("1")
 
@@ -43,8 +43,8 @@ def create_appointmentitem_table(db_name):
              AppointmentID integer,
              ItemID integer,
              primary key (AppointmentItemID),
-             foreign key (AppointmentID) references Appointment(AppointmentID),
-             foreign key (ItemID) references Item(ItemID))"""
+             foreign key (AppointmentID) references Appointment(AppointmentID)ON UPDATE CASCADE ON DELETE RESTRICT,
+             foreign key (ItemID) references Item(ItemID)ON UPDATE CASCADE ON DELETE RESTRICT)"""
     create_table(db_name,table_name,sql)
 ##    print("2")
 
@@ -89,19 +89,29 @@ def create_item_table(db_name):
              CustomerID integer,
              DressTypeID integer,
              StatusID integer,
+             ItemTypeID integer,
              Bridal string,
              DateIn string,
              DateRequired string,
              Instructions string,
              OtherRequirements string,
              primary key (ItemID),
-             foreign key (BodiceTypeID) references BodiceType(BodiceTypeID),
-             foreign key (CustomerID) references Customer(CustomerID),
-             foreign key (DressTypeID) references DressType(DressTypeID),
-             foreign key (StatusID) references Status(StatusID))"""
+             foreign key (BodiceTypeID) references BodiceType(BodiceTypeID)ON UPDATE CASCADE ON DELETE RESTRICT,
+             foreign key (CustomerID) references Customer(CustomerID)ON UPDATE CASCADE ON DELETE RESTRICT,
+             foreign key (DressTypeID) references DressType(DressTypeID)ON UPDATE CASCADE ON DELETE RESTRICT,
+             foreign key (StatusID) references Status(StatusID)ON UPDATE CASCADE ON DELETE RESTRICT,
+             foreign key (ItemTypeID) references ItemType(ItemTypeID)ON UPDATE CASCADE ON DELETE RESTRICT)"""
     create_table(db_name,table_name,sql)
 ##    print("6")
 
+def create_item_type_table(db_name):
+    table_name = "ItemType"
+    sql = """create table ItemType
+             (ItemTypeID integer,
+             ItemType string,
+             primary key (ItemTypeID))"""
+    create_table(db_name,table_name,sql)
+    
 def create_status_table(db_name):
     table_name = "Status"
     sql = """create table Status
@@ -131,6 +141,7 @@ def create_database():
     create_bodicetype_table(db_name)
     create_customer_table(db_name)
     create_dresstype_table(db_name)
+    create_item_type_table(db_name)
     create_status_table(db_name)
     create_type_table(db_name)
     create_appointment_table(db_name)
@@ -139,7 +150,7 @@ def create_database():
 
 
 
-
+create_database()
 
 
 #Appointment,AppointmentItem,BodiceType,Customer,DressType,Item,Status,Type
