@@ -14,7 +14,6 @@ def search_customer_data(db_name):
         db.commit()
         print('test4')
         return temp
-
     
 def search_status_data(db_name):
     with sqlite3.connect(db_name) as db:
@@ -75,15 +74,15 @@ def search_item_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
         sql = """SELECT * FROM Appointment WHERE BodiceTypeID = ? AND CustomerID = ? AND DressTypeID = ? AND
-StatusID = ? AND Bridal = ? AND DateIn = ? AND DateRequired = ? AND Instructions = AND OtherRequirements = ?"""
-        BodiceTypeID,CustomerID,DressTypeID,StatusID,Bridal,DateIn,DateRequired,Instructions,OtherRequirements = item_input(db_name)
-        values = (BodiceTypeID,CustomerID,DressTypeID,StatusID,Bridal,DateIn,DateRequired,Instructions,OtherRequirements)
+StatusID = ? AND ItemTypeID = ? AND Bridal = ? AND DateIn = ? AND DateRequired = ? AND Instructions = AND OtherRequirements = ?"""
+        BodiceTypeID,CustomerID,DressTypeID,StatusID,ItemTypeID,Bridal,DateIn,DateRequired,Instructions,OtherRequirements = item_input(db_name)
+        values = (BodiceTypeID,CustomerID,DressTypeID,StatusID,ItemTypeID,Bridal,DateIn,DateRequired,Instructions,OtherRequirements)
         cursor.execute(sql,values)
         temp = cursor.fetchall()
         db.commit()
         return temp
 
-def search_appointment_item(db_name):
+def search_appointment_item_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
         sql = "SELECT * FROM AppointmentItem WHERE AppointmentID = ? AND ItemID = ?"
@@ -93,7 +92,17 @@ def search_appointment_item(db_name):
         temp = cursor.fetchall()
         db.commit()
         return temp
-    
+
+def search_item_type_data(db_name):
+    with sqlite3.connect(db_name) as db:
+        cursor = db.cursor()
+        sql = "SELECT * FROM ItemType WHERE ItemType = ?"
+        ItemType = item_type_input()
+        values = (ItemType)
+        cursor.execute(sql,values)
+        temp = cursor.fetchall()
+        db.commit()
+        return temp
 ##temp = search_customer_data('test.db')
 ##print(len(temp))
 ##print(len(temp[0]))
