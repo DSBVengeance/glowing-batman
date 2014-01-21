@@ -25,9 +25,7 @@ def choose_data(code,db_name):
 
     
     
-    for n in range(len(temp)):
-        print('test1')
-        print('{0:<5} {1}'.format(n+1,temp[n]))
+    
 
 
 ##select_data("4","test2.db")

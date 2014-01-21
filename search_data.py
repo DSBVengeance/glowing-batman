@@ -1,62 +1,80 @@
 import sqlite3
-from data_input import *
+
+from bibliography import *
 
 def search_customer_data(db_name):
-    print('test3')
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "SELECT * FROM Customer WHERE FirstName = ? AND Surname = ? AND TelephoneNumber = ?"
+        sql = "SELECT * FROM Customer WHERE FirstName LIKE ? AND Surname LIKE ? AND TelephoneNumber LIKE ?"
         Firstname, Surname, Number = customer_input()
+        Firstname = '%'+Firstname+'%'
+        Surname = '%'+Surname+'%'
+        Number = '%'+Number+'%'
         values = (Firstname, Surname, Number)
         cursor.execute(sql,values)
         temp = cursor.fetchall()
+        
+##        print(temp)
+        print(len(temp))
+        for n in range(len(temp)):
+            print('{0:<5} {1}'.format(n+1,temp[n]))
         db.commit()
-        print('test4')
-        return temp
     
 def search_status_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "SELECT * FROM Status WHERE Status = ?"
+        sql = "SELECT * FROM Status WHERE Status LIKE ?"
         Status = status_input()
+        Status = '%'+Status+'%'
         values = (Status)
         cursor.execute(sql,values)
         temp = cursor.fetchall()
         db.commit()
-        return temp
+        for n in range(len(temp)):
+            print('{0:<5} {1}'.format(n+1,temp[n]))
 
 def search_type_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "SELECT * FROM Type WHERE Type = ?"
+        sql = "SELECT * FROM Type WHERE Type LIKE ?"
         Type = type_input()
+        Type = '%'+Type+'%'
         values = (Type)
         cursor.execute(sql,values)
         temp = cursor.fetchall()
         db.commit()
-        return temp
+        for n in range(len(temp)):
+            print('{0:<5} {1}'.format(n+1,temp[n]))
 
 def search_bodice_type_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "SELECT * FROM BodiceType WHERE BodiceDetail = ? AND BodiceFabric = ? AND BodiceLength = ?"
+        sql = "SELECT * FROM BodiceType WHERE BodiceDetail LIKE ? AND BodiceFabric LIKE ? AND BodiceLength LIKE ?"
         Detail, Fabric, Length = bodice_type_input()
+        Detail = '%'+Detail+'%'
+        Fabric = '%'+Fabric+'%'
+        Length = '%'+Length+'%'
         values = (Detail, Fabric, Length)
         cursor.execute(sql,values)
         temp = cursor.fetchall()
         db.commit()
-        return temp
+        for n in range(len(temp)):
+            print('{0:<5} {1}'.format(n+1,temp[n]))
 
 def search_dress_type_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "SELECT * FROM DressType WHERE DressDetail = ? AND DressFabric = ? AND DressLength = ?"
-        Detail, Fabric, Length = bodice_type_input()
+        sql = "SELECT * FROM DressType WHERE DressDetail LIKE ? AND DressFabric LIKE ? AND DressLength LIKE ?"
+        Detail, Fabric, Length = dress_type_input()
+        Detail = '%'+Detail+'%'
+        Fabric = '%'+Fabric+'%'
+        Length = '%'+Length+'%'
         values = (Detail, Fabric, Length)
         cursor.execute(sql,values)
         temp = cursor.fetchall()
         db.commit()
-        return temp
+        for n in range(len(temp)):
+            print('{0:<5} {1}'.format(n+1,temp[n]))
 
 def search_appointment_data(db_name):
     with sqlite3.connect(db_name) as db:
@@ -67,7 +85,8 @@ def search_appointment_data(db_name):
         cursor.execute(sql,values)
         temp = cursor.fetchall()
         db.commit()
-        return temp
+        for n in range(len(temp)):
+            print('{0:<5} {1}'.format(n+1,temp[n]))
 
 def search_item_data(db_name):
     with sqlite3.connect(db_name) as db:
@@ -79,7 +98,8 @@ StatusID = ? AND ItemTypeID = ? AND Bridal = ? AND DateIn = ? AND DateRequired =
         cursor.execute(sql,values)
         temp = cursor.fetchall()
         db.commit()
-        return temp
+        for n in range(len(temp)):
+            print('{0:<5} {1}'.format(n+1,temp[n]))
 
 def search_appointment_item_data(db_name):
     with sqlite3.connect(db_name) as db:
@@ -90,7 +110,8 @@ def search_appointment_item_data(db_name):
         cursor.execute(sql,values)
         temp = cursor.fetchall()
         db.commit()
-        return temp
+        for n in range(len(temp)):
+            print('{0:<5} {1}'.format(n+1,temp[n]))
 
 def search_item_type_data(db_name):
     with sqlite3.connect(db_name) as db:
@@ -101,7 +122,11 @@ def search_item_type_data(db_name):
         cursor.execute(sql,values)
         temp = cursor.fetchall()
         db.commit()
-        return temp
+        for n in range(len(temp)):
+            print('{0:<5} {1}'.format(n+1,temp[n]))
+
+
+            
 ##temp = search_customer_data('test.db')
 ##print(len(temp))
 ##print(len(temp[0]))

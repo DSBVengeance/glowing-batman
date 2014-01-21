@@ -124,7 +124,7 @@ Else, press "M" to return to the main menu""")
     return choice
 
 if __name__ == "__main__":
-    db_name = ("test2.db")
+    db_name = ("test3.db")
     end = False
     print("Welcome!")
     while not end:
@@ -195,8 +195,26 @@ if __name__ == "__main__":
             if choice == "m" or choice == "M":
                 print()
                 pass
-            else:
-                select_data2(choice,db_name)
+            choice = int(choice)
+            if choice == 1:
+                temp = search_appointment_data(db_name)
+            elif choice == 2:
+                temp = search_appointment_item_data(db_name)
+            elif choice == 3:
+                temp = search_bodice_type_data(db_name)
+            elif choice == 4:
+                temp = search_customer_data(db_name)
+            elif choice == 5:
+                temp = search_dress_type_data(db_name)
+            elif choice == 6:
+                temp = search_item_data(db_name)
+            elif choice == 7:
+                temp = search_item_type_data(db_name)
+            elif choice == 8:
+                temp = search_status_data(db_name)
+            elif choice == 9:
+                temp = search_type_data(db_name)
+                
         elif choice == '6':
             db_name = db_name_input()
         else:

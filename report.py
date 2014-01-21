@@ -1,8 +1,5 @@
 import sqlite3
 
-
-
-
 if choice == 1:
     
     print('{0:>7} {1:>5} {2:>5} {3:>12}'.format('Customer Name', 'Date','Time','Customer Telephone No.'))

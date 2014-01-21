@@ -65,7 +65,7 @@ def create_customer_table(db_name):
              (CustomerID integer,
              FirstName string,
              Surname string,
-             TelephoneNumber integer,
+             TelephoneNumber blob,
              primary key (CustomerID))"""
     create_table(db_name,table_name,sql)
 ##    print("4")
