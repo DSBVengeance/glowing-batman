@@ -1,5 +1,6 @@
-from search_data import *
-from data_input import *
+from bibliography import *
+
+temp = ''
 
 if choice == '1':
     pass

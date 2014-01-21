@@ -1,6 +1,5 @@
 import sqlite3
-
-from bibliography import *
+from data_input import *
 
 def search_customer_data(db_name):
     print('test3')

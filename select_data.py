@@ -1,6 +1,6 @@
-from bibliography import *
+from search_data import *
 
-def select_data2(code,db_name):
+def choose_data(code,db_name):
     code = int(code)
     if code == 1:
         temp = search_appointment_data(db_name)
@@ -9,7 +9,6 @@ def select_data2(code,db_name):
     elif code == 3:
         temp = search_bodice_type_data(db_name)
     elif code == 4:
-        print('test2')
         temp = search_customer_data(db_name)
     elif code == 5:
         temp = search_dress_type_data(db_name)
@@ -28,4 +27,7 @@ def select_data2(code,db_name):
     
     for n in range(len(temp)):
         print('test1')
-        print(temp[n])
+        print('{0:<5} {1}'.format(n+1,temp[n]))
+
+
+##select_data("4","test2.db")

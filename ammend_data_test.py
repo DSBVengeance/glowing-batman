@@ -1,16 +1,18 @@
 import sqlite3
 
+from bibliography import *
+
 def update_status_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
         sql = """UPDATE Status set
                  Status = ?
-                 WHERE StatusID = ?"""
-        statusID = int(input("Please enter the ID of the data you wish to change: "))
-        status = input("Please enter the change you wish to make: ")
-        if status == "":
+                 WHERE Status = ?"""
+        print("If no changes need to be made, leave space blank")
+        Status = status_input()
+        if Status == "":
             return
-        values = (status,statusID)
+        values = (Status,)
         cursor.execute(sql,values)
         db.commit()
 
@@ -19,39 +21,33 @@ def update_type_data(db_name):
         cursor = db.cursor()
         sql = """UPDATE Type set
                  Type = ?
-                 WHERE TypeID = ?"""
-        TypeID = int(input("Please enter the ID of the data you wish to change: "))
-        Type = input("Please enter the change you wish to make: ")
+                 WHERE Type = ?"""
+        print("If no changes need to be made, leave space blank")
+        Type = type_input()
         if Type == "":
             return
-        values = (Type,TypeID)
+        values = (Type,)
         cursor.execute(sql,values)
         db.commit()
 
 def update_customer_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "SELECT * FROM Customer WHERE CustomerID = ?"
-        ID = int(input("Please enter the ID of the data you wish to change: "))
-        cursor.execute(sql, (ID, ))
-        temp = cursor.fetchall()
         sql = """UPDATE Customer set
                  FirstName = ?, Surname = ?, TelephoneNumber = ?
                  WHERE CustomerID = ?"""
         print("If no changes need to be made, leave space blank")
-        Firstname = input("Please enter the change you wish to make: ")
-        Surname = input("Please enter the change you wish to make: ")
-        Number = input("Please enter the change you wish to make: ")
+        Firstname, Surname, Number = customer_input()
         if Firstname == "":
             Firstname = temp[0][1]
         if Surname == "":
             Surname = temp[0][2]
         if Number == "":
             Number = temp[0][3]
-        values = (Firstname, Surname, Number, ID)
+        values = (Firstname, Surname, Number)
         cursor.execute(sql,values)
         db.commit()
-
+        
 def update_bodice_type_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()

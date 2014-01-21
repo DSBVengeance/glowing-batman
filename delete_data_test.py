@@ -1,10 +1,12 @@
+from bibliography import *
+
 import sqlite3
 
 def delete_status_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
         sql = "DELETE FROM Status WHERE Status = ?"
-        Status = input("Please enter the Status you wish to remove: ")
+        Status = status_input()
         values = (Status, )
         cursor.execute(sql,values)
         db.commit()
@@ -13,7 +15,7 @@ def delete_type_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
         sql = "DELETE FROM Type WHERE Type = ?"
-        Type = input("Please enter the Type you wish to remove: ")
+        Type = type_input()
         values = (Type, )
         cursor.execute(sql,values)
         db.commit()
@@ -21,41 +23,35 @@ def delete_type_data(db_name):
 def delete_customer_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "DELETE FROM Customer WHERE FirstName = ?, Surname = ?, TelephoneNumber = ?"
-        Firstname = input("Please enter the Forename you wish to delete: ")
-        Surname = input("Please enter the Surname you wish to delete: ")
-        Number = input("Please enter the Telephone Number you wish to delete: ")
-        cursor.execute(sql, (Firstname,Surname,Number))
+        sql = "DELETE FROM Customer WHERE FirstName = ? AND Surname = ? AND TelephoneNumber = ?"
+        Firstname, Surname, Number = customer_input()
+        values = (Firstname, Surname, Number)
+        cursor.execute(sql, values)
         db.commit()
 
 def delete_bodice_type_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "DELETE FROM BodiceType WHERE BodiceDetail = ?, BodiceFabric = ?, BodiceLength = ?"
-        Detail = input("Please enter the Detail you wish to delete: ")
-        Fabric = input("Please enter the Fabric you wish to delete: ")
-        Length = input("Please enter the Length you wish to make: ")
-        cursor.execute(sql, (Detail,Fabric,Length))
+        sql = "DELETE FROM BodiceType WHERE BodiceDetail = ? AND BodiceFabric = ? AND BodiceLength = ?"
+        Detail, Fabric, Length = bodice_type_input()
+        values = (Detail, Fabric, Length)
+        cursor.execute(sql,values)
         db.commit()
 
 def delete_dress_type_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "DELETE FROM DressType WHERE DressDetail = ?, DressFabric = ?, DressLength = ?"
-        Detail = input("Please enter the Detail you wish to delete: ")
-        Fabric = input("Please enter the Fabric you wish to delete: ")
-        Length = input("Please enter the Length you wish to make: ")
-        cursor.execute(sql, (Detail,Fabric,Length))
+        sql = "DELETE FROM DressType WHERE DressDetail = ? AND DressFabric = ? AND DressLength = ?"
+        Detail, Fabric, Length = bodice_type_input()
+        values = (Detail,Fabric,Length)
+        cursor.execute(sql,values)
         db.commit()
 
 def delete_appointment_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "DELETE FROM Appointment WHERE CustomerID = ?, TypeID = ?, Date = ?, Time = ?"
-        CustomerID = input("Please enter the CustomerID you wish to delete: ")
-        TypeID = input("Please enter the TypeID you wish to delete: ")
-        Date = input("Please enter the Date you wish to delete: ")
-        Time = input("Please enter the Time you wish to delete: ")
+        sql = "DELETE FROM Appointment WHERE CustomerID = ? AND TypeID = ? AND Date = ? AND Time = ?"
+        CustomerID, TypeID, Date, Time = appointment_input(db_name)
         values = (CustomerID,TypeID,Date,Time)
         cursor.execute(sql,values)
         db.commit()
@@ -63,26 +59,28 @@ def delete_appointment_data(db_name):
 def delete_item_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "DELETE FROM BodiceType WHERE BodiceTypeID = ?, CustomerID = ?, DressTypeID = ?, StatusID = ?, Bridal = ?, DateIn = ?, DateRequired = ?"
-        BodiceTypeID = input("Please enter the BodiceTypeID you wish to delete: ")
-        CustomerID = input("Please enter the CustomerID you wish to delete: ")
-        DressTypeID = input("Please enter the DressTypeID you wish to delete: ")
-        StatusID = input("Please enter the StatusID you wish to delete: ")
-        Bridal = input("Please enter the Bridal you wish to delete: ")
-        DateIn = input("Please enter the Date the item you wish to delete was taken in: ")
-        DateRequired = input("Please enter the Date the item is required: ")
-        values = (BodiceTypeID,CustomerID,DressTypeID,StatusID,Bridal,DateIn,DateRequired)
-        cursor.execute(sql,values)
+        sql = "DELETE FROM BodiceType WHERE BodiceTypeID = ? AND CustomerID = ? AND DressTypeID = ? AND StatusID = ? AND Bridal = ? AND DateIn = ? AND DateRequired = ?"
+        BodiceTypeID,CustomerID,DressTypeID,StatusID,ItemTypeID,Bridal,DateIn,DateRequired,Instructions,OtherRequirements = item_input(db_name)
+        values = (BodiceTypeID,CustomerID,DressTypeID,StatusID,ItemTypeID,Bridal,DateIn,DateRequired,Instructions,OtherRequirements)
+        cursor.execute(sql, values)
         db.commit()
 
 def delete_appointmentItem_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "DELETE FROM AppointmentItem WHERE AppointmentID = ?, ItemID = ?"
-        AppointmentID = input("Please enter the AppointmentID: ")
-        ItemID = input("Please enter the ItemID: ")
+        sql = "DELETE FROM AppointmentItem WHERE AppointmentID = ? AND ItemID = ?"
+        AppointmentID, ItemID = appointment_item_input(db_name)
         values = (AppointmentID,ItemID)
-        cursor.execute(sql,values)
+        cursor.execute(sql, values)
+        db.commit()
+
+def delete_item_type_data(db_name):
+    with sqlite3.connect(db_name) as db:
+        cursor = db.cursor()
+        sql = "DELTE FROM ItemType WHERE ItemType = ?"
+        ItemType = item_type_input()
+        values = (ItemType,)
+        cursor.execute(sql, values)
         db.commit()
 
 if __name__ == "__main__":

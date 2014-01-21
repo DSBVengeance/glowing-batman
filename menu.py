@@ -124,6 +124,7 @@ Else, press "M" to return to the main menu""")
     return choice
 
 if __name__ == "__main__":
+    db_name = ("test2.db")
     end = False
     print("Welcome!")
     while not end:

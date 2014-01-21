@@ -1,10 +1,11 @@
 import sqlite3
 
+from bibliography import *
+
 def insert_status_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
         sql = "INSERT into Status (Status) values (?)"
-        status = input("Please enter the data you wish to add: ")
         Status = status_input()
         values = (Status,)
         cursor.execute(sql,values)
@@ -25,7 +26,6 @@ def insert_customer_data(db_name):
         sql = "INSERT into Customer (FirstName,Surname,TelephoneNumber) values (?,?,?)"
         Firstname, Surname, Number = customer_input()
         values = (Firstname, Surname, Number)
-        cursor.execute(sql,values)
         cursor.execute(sql,values)
         db.commit()
 

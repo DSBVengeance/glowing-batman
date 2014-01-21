@@ -150,7 +150,5 @@ def create_database():
 
 
 
-create_database()
-
 
 #Appointment,AppointmentItem,BodiceType,Customer,DressType,Item,Status,Type
