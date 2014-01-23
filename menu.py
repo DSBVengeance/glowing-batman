@@ -107,11 +107,13 @@ def view_menu():
 
 6. Item
 
-7. Status
+7. Item Type
 
-8. Type
+8. Status
 
-Please enter the number of your choice below (1-8)""")
+9. Type
+
+Please enter the number of your choice below (1-9)""")
     choice = input()
 ##    print(choice)
     return choice
@@ -214,6 +216,10 @@ if __name__ == "__main__":
                 temp = search_status_data(db_name)
             elif choice == 9:
                 temp = search_type_data(db_name)
+            print()
+            for n in range(len(temp)):
+                print("{0}. {1}".format(n+1, temp[n][1:]))
+                
                 
         elif choice == '6':
             db_name = db_name_input()
