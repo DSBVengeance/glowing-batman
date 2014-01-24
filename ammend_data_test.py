@@ -37,14 +37,9 @@ def update_customer_data(db_name):
                  FirstName = ?, Surname = ?, TelephoneNumber = ?
                  WHERE CustomerID = ?"""
         print("If no changes need to be made, leave space blank")
+        ID = int(input("ID: "))
         Firstname, Surname, Number = customer_input()
-        if Firstname == "":
-            Firstname = temp[0][1]
-        if Surname == "":
-            Surname = temp[0][2]
-        if Number == "":
-            Number = temp[0][3]
-        values = (Firstname, Surname, Number)
+        values = (Firstname, Surname, Number, ID)
         cursor.execute(sql,values)
         db.commit()
         
@@ -104,7 +99,7 @@ def update_appointment_data(db_name):
         cursor.execute(sql, (ID, ))
         temp = cursor.fetchall()
         sql = """UPDATE Appointment set
-                 CustomerID = ?, TypeID = ?, Date = ?, Time = ?,
+                 CustomerID = ?, TypeID = ?, Date = ?, Time = ?
                  WHERE AppointmentID = ?"""
         print("If no changes need to be made, leave space blank")
         CustomerID = input("Please enter the change you wish to make: ")
@@ -187,13 +182,13 @@ def update_appointmentItem_data(db_name):
         db.commit()
 
 if __name__ == "__main__":
-    db_name = ("test.db")
-    update_status_data(db_name)
-    update_type_data(db_name)
+    db_name = ("test3.db")
+##    update_status_data(db_name)
+##    update_type_data(db_name)
     update_customer_data(db_name)
-    update_bodice_type_data(db_name)
-    update_dress_type_data(db_name)
-    update_appointment_data(db_name)
-    update_item_data(db_name)
-    update_appointmentItem_data(db_name)
+##    update_bodice_type_data(db_name)
+##    update_dress_type_data(db_name)
+##    update_appointment_data(db_name)
+##    update_item_data(db_name)
+##    update_appointmentItem_data(db_name)
     
