@@ -79,8 +79,10 @@ def search_dress_type_data(db_name):
 def search_appointment_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "SELECT * FROM Appointment WHERE CustomerID = ? AND TypeID = ? AND Date = ? AND Time = ?"
+        sql = "SELECT * FROM Appointment WHERE CustomerID = ? AND TypeID = ? AND Date LIKE ? AND Time LIKE ?"
         CustomerID, TypeID, Date, Time = appointment_input(db_name)
+        Date = "%"+Date+"%"
+        Time = "%"+Date+"%"
         values = (CustomerID,TypeID,Date,Time)
         cursor.execute(sql,values)
         temp = cursor.fetchall()
@@ -93,8 +95,13 @@ def search_item_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
         sql = """SELECT * FROM Appointment WHERE BodiceTypeID = ? AND CustomerID = ? AND DressTypeID = ? AND
-StatusID = ? AND ItemTypeID = ? AND Bridal = ? AND DateIn = ? AND DateRequired = ? AND Instructions = AND OtherRequirements = ?"""
+StatusID = ? AND ItemTypeID = ? AND Bridal LIKE ? AND DateIn LIKE ? AND DateRequired LIKE ? AND Instructions = AND OtherRequirements LIKE ?"""
         BodiceTypeID,CustomerID,DressTypeID,StatusID,ItemTypeID,Bridal,DateIn,DateRequired,Instructions,OtherRequirements = item_input(db_name)
+        Bridal = "%"+Bridal+"%"
+        DateIn = "%"+DateIn+"%"
+        DateRequired = "%"+DateRequired+"%" 
+        Instructions = "%"+Instructions+"%"
+        OtherRequirements = "%"+OtherRequirements+"%"
         values = (BodiceTypeID,CustomerID,DressTypeID,StatusID,ItemTypeID,Bridal,DateIn,DateRequired,Instructions,OtherRequirements)
         cursor.execute(sql,values)
         temp = cursor.fetchall()
@@ -119,8 +126,9 @@ def search_appointment_item_data(db_name):
 def search_item_type_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "SELECT * FROM ItemType WHERE ItemType = ?"
+        sql = "SELECT * FROM ItemType WHERE ItemType LIKE ?"
         ItemType = item_type_input()
+        ItemType = "%"+ItemType+"%"
         values = (ItemType,)
         cursor.execute(sql,values)
         temp = cursor.fetchall()
@@ -191,11 +199,11 @@ def item_input(db_name):
     ItemType = search_item_type_data(db_name)
     ItemType = data_selection(ItemType)
     ItemType = ItemType[0]
-    Bridal = input("Is this a bridal item? (yes/no): ").strip()
-    if Bridal == "no":
+    Bridal = input("Is this a bridal item? (yes/no): ").strip().upper()
+    if Bridal == "NO" or Bridal == "N":
         BodiceType = 1
         DressType = 1
-    elif Bridal == "yes":
+    elif Bridal == "YES" or Bridal == "Y":
         BodiceType = search_bodice_type_data(db_name)
         BodiceType = data_selection(BodiceType)
         BodiceType = BodiceType[0]

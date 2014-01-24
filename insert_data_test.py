@@ -57,7 +57,7 @@ def insert_appointment_data(db_name):
 def insert_item_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
-        sql = "INSERT into Item (BodiceTypeID, CustomerID, DressTypeID, StatusID, ItemTypeID, Bridal, DateIn, DateRequired) values (?,?,?,?,?,?,?)"
+        sql = "INSERT into Item (BodiceTypeID, CustomerID, DressTypeID, StatusID, ItemTypeID, Bridal, DateIn, DateRequired,Instructions,OtherRequirements) values (?,?,?,?,?,?,?,?,?,?)"
         BodiceTypeID,CustomerID,DressTypeID,StatusID,ItemTypeID,Bridal,DateIn,DateRequired,Instructions,OtherRequirements = item_input(db_name)
         values = (BodiceTypeID,CustomerID,DressTypeID,StatusID,ItemTypeID,Bridal,DateIn,DateRequired,Instructions,OtherRequirements)
         cursor.execute(sql, values)
@@ -72,10 +72,11 @@ def insert_appointment_item_data(db_name):
         cursor.execute(sql, values)
         db.commit()
 
-def insert_item_type_data(db_name, ItemType):
+def insert_item_type_data(db_name):
     with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
         sql = "INSERT into ItemType (ItemType) values (?)"
+        ItemType = item_type_input()
         values = (ItemType,)
         cursor.execute(sql, values)
         db.commit()
@@ -87,3 +88,4 @@ def insert_item_type_data(db_name, ItemType):
 ##    insert_customer_data(db_name)
 ##    insert_bodice_type_data(db_name)
 ##    insert_dress_type_data(db_name)
+##    insert_item_type_data(db_name)
