@@ -17,7 +17,9 @@ def main_menu():
 
 6. Load Database
 
-Please enter the number of your choice below (1-6)
+7. Reports
+
+Please enter the number of your choice below (1-7)
 Or press "Q" to quit""")
     choice = input()
     ##print(choice)
@@ -125,6 +127,17 @@ Else, press "M" to return to the main menu""")
     choice = input()
     return choice
 
+def report_menu():
+    print("""Which would you like to report?
+
+1. Appointments For A Day
+
+2. Items On Date In
+
+3. Items In Progress""")
+    choice = input()
+    return choice
+
 if __name__ == "__main__":
     db_name = ("test3.db")
     end = False
@@ -197,32 +210,40 @@ if __name__ == "__main__":
             if choice == "m" or choice == "M":
                 print()
                 pass
-            choice = int(choice)
-            if choice == 1:
+            if choice == "1":
                 temp = search_appointment_data(db_name)
-            elif choice == 2:
+            elif choice == "2":
                 temp = search_appointment_item_data(db_name)
-            elif choice == 3:
+            elif choice == "3":
                 temp = search_bodice_type_data(db_name)
-            elif choice == 4:
+            elif choice == "4":
                 temp = search_customer_data(db_name)
-            elif choice == 5:
+            elif choice == "5":
                 temp = search_dress_type_data(db_name)
-            elif choice == 6:
+            elif choice == "6":
                 temp = search_item_data(db_name)
-            elif choice == 7:
+            elif choice == "7":
                 temp = search_item_type_data(db_name)
-            elif choice == 8:
+            elif choice == "8":
                 temp = search_status_data(db_name)
-            elif choice == 9:
+            elif choice == "9":
                 temp = search_type_data(db_name)
             print()
             for n in range(len(temp)):
                 print("{0}. {1}".format(n+1, temp[n][1:]))
-                
-                
         elif choice == '6':
             db_name = db_name_input()
+        elif choice == '7':
+            choice = report_menu()
+            if choice == "m" or choice == "M":
+                print()
+                pass
+            elif choice == "1":
+                create_report(db_name,1)
+            elif choice == "2":
+                create_report(db_name,2)
+            elif choice == "3":
+                create_report(db_name,3)
         else:
-            print("""Please enter a valid option (1-6) or Q to quit.
+            print("""Please enter a valid option (1-7) or Q to quit.
 """)

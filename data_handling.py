@@ -149,9 +149,43 @@ def data_selection(data):
 #Data input
 
 def customer_input():
-    Firstname = input("Please enter the first name of the customer: ").strip()
-    Surname = input("Please enter the surname of the customer: ").strip()
-    Number = input("Please enter the contact number of the customer: ").strip()
+    valid = False
+    while not valid:
+        Firstname = input("Please enter the first name of the customer: ").strip()
+        Firsttest = 0
+        for n in range(len(Firstname)):
+            if Firstname[n].isdigit() == True:
+                Firsttest += 1        
+        if Firsttest >= 1:
+            valid = False
+            print("Please enter a First Name, only using letters.")
+            pass
+        else:
+            while not valid:
+                Surname = input("Please enter the surname of the customer: ").strip()
+                Surtest = 0
+                for n in range(len(Surname)):
+                    if Surname[n].isdigit() == True:
+                        Surtest += 1
+                        print(Surtest)
+                if Surtest >= 1:
+                    valid = False
+                    print("Please enter a Surname, using only letters.")
+                    pass
+                else:
+                    while not valid:
+                        Number = input("Please enter the contact number of the customer: ").strip()
+                        Numtest = 0
+                        for n in range(len(Number)):
+                            if Number[n].isdigit() == False:
+                                Numtest += 1
+                        if Numtest >= 1:
+                            print("Please enter a phone number")
+                        else:
+                            if len(Number) == 11:
+                                valid = True
+                            else:
+                                print('Please enter a valid phone number (11 digits)')
     return Firstname, Surname, Number
 
 def status_input():
@@ -190,30 +224,36 @@ def appointment_input(db_name):
     return Customer, Type, Date, Time
 
 def item_input(db_name):
-    Customer = search_customer_data(db_name)
-    Customer = data_selection(Customer)
-    Customer = Customer[0]
-    Status = search_status_data(db_name)
-    Status = data_selection(Status)
-    Status = Status[0]
-    ItemType = search_item_type_data(db_name)
-    ItemType = data_selection(ItemType)
-    ItemType = ItemType[0]
-    Bridal = input("Is this a bridal item? (yes/no): ").strip().upper()
-    if Bridal == "NO" or Bridal == "N":
-        BodiceType = 1
-        DressType = 1
-    elif Bridal == "YES" or Bridal == "Y":
-        BodiceType = search_bodice_type_data(db_name)
-        BodiceType = data_selection(BodiceType)
-        BodiceType = BodiceType[0]
-        DressType = search_dress_type_data(db_name)
-        DressType = data_selection(DressType)
-        DressType = DressType[0]
-    DateIn = input("Please enter the Date the item came in: ").strip()
-    DateRequired = input("Please enter the date the item in required (if applicable): ").strip()
-    Instructions = input("Please enter the instructions for the item: ").strip()
-    OtherRequirements = input("Please enter any otger requirements: ").strip()
+    valid = False
+    while not valid:
+        Customer = search_customer_data(db_name)
+        Customer = data_selection(Customer)
+        Customer = Customer[0]
+        
+        if CustomerTest == True:
+            valid = False
+            print("Please entera name, without ")
+        Status = search_status_data(db_name)
+        Status = data_selection(Status)
+        Status = Status[0]
+        ItemType = search_item_type_data(db_name)
+        ItemType = data_selection(ItemType)
+        ItemType = ItemType[0]
+        Bridal = input("Is this a bridal item? (yes/no): ").strip().upper()
+        if Bridal == "NO" or Bridal == "N":
+            BodiceType = 1
+            DressType = 1
+        elif Bridal == "YES" or Bridal == "Y":
+            BodiceType = search_bodice_type_data(db_name)
+            BodiceType = data_selection(BodiceType)
+            BodiceType = BodiceType[0]
+            DressType = search_dress_type_data(db_name)
+            DressType = data_selection(DressType)
+            DressType = DressType[0]
+        DateIn = input("Please enter the Date the item came in: ").strip()
+        DateRequired = input("Please enter the date the item in required (if applicable): ").strip()
+        Instructions = input("Please enter the instructions for the item: ").strip()
+        OtherRequirements = input("Please enter any otger requirements: ").strip()
     return BodiceType,Customer,DressType,Status,ItemType,Bridal,DateIn,DateRequired,Instructions,OtherRequirements
 
 def appointment_item(db_name):
